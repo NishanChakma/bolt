@@ -1,12 +1,15 @@
 import React, {useCallback} from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import {CustomButtonWithBG} from '../../components/CustomButton';
 import {styles} from './styles';
 
 const index = () => {
+  const navigation = useNavigation();
   const onPress = useCallback(() => {
-    console.log('presssssssss');
+    navigation.navigate('Login');
   }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to Bolt</Text>
