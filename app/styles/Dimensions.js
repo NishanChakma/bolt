@@ -1,8 +1,7 @@
 import {scale} from 'react-native-size-matters';
 import {Dimensions, StatusBar} from 'react-native';
-export const BUTTON_HEIGHT = scale(43);
+export const BUTTON_HEIGHT = scale(52);
 export const INPUT_HEIGHT = scale(43);
-export const BOTTOM_TABS = scale(56);
 export const BORDER_RADIUS = scale(4);
 export const SIZE_SM = scale(10);
 export const HEADER_HEIGHT = scale(40);
