@@ -9,7 +9,6 @@ export const HEADER_HEIGHT = scale(40);
 
 export const screenWidth = Dimensions.get('window').width;
 export const screenHeight = Dimensions.get('window').height;
-// export const STATUS_BAR_HEIGHT = StatusBar.currentHeight || 24;
 
 // custom scaling
 // designed dimensions as per Figma
@@ -17,7 +16,7 @@ const guideLineBaseWidth = 360; // px
 const guideLineBaseHeight = 640; // px
 const {width, height} = Dimensions.get('window');
 const [shortDimension, longDimension] =
-    width < height ? [width, height] : [height, width];
+  width < height ? [width, height] : [height, width];
 export const base = size => (longDimension / guideLineBaseHeight) * size;
 export const wdp = size => (shortDimension / guideLineBaseWidth) * size;
 export const hdp = size => size + (base(size) - size) * 0.01;
