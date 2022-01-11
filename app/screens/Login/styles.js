@@ -24,6 +24,7 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 2,
     marginBottom: hdp(30),
     width: '85%',
+    height: hdp(50),
   },
   button: {
     marginTop: hdp(30),

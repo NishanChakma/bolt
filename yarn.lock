@@ -1658,6 +1658,11 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
+awesome-phonenumber@^2.66.0:
+  version "2.66.0"
+  resolved "https://registry.yarnpkg.com/awesome-phonenumber/-/awesome-phonenumber-2.66.0.tgz#b3198131117935fd313625304e1f2c42dd725f47"
+  integrity sha512-mC3+t8KAvodwQFSt4j63g+rNSjZf3+5CrVOduANB3JkCFN6LWsmJGLqBtW3F7S1J35hutoYKLwbCBHT7VtO1gQ==
+
 babel-core@^7.0.0-bridge.0:
   version "7.0.0-bridge.0"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-7.0.0-bridge.0.tgz#95a492ddd90f9b4e9a4a1da14eb335b87b634ece"

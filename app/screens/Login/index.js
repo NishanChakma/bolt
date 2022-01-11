@@ -1,13 +1,14 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import {View, Text, TextInput} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import PhoneNumber from 'awesome-phonenumber';
 import {Header} from '../../components/Header';
 import {CustomButtonWithBG} from '../../components/CustomButton';
 
 import {styles} from './styles';
 
 const index = () => {
-  const [number, onChangeNumber] = React.useState(null);
+  const [number, onChangeNumber] = useState('+88');
   const navigation = useNavigation();
 
   const backButtonPress = useCallback(() => {
@@ -15,8 +16,15 @@ const index = () => {
   }, [navigation]);
 
   const loginPress = useCallback(() => {
-    alert('press');
-  }, []);
+    const region = PhoneNumber(number).getRegionCode();
+    let checkValid = new PhoneNumber(number, region);
+    const condition = checkValid.isValid() && checkValid.isMobile();
+    if (!condition) {
+      alert('Phone number is invalid!');
+    } else {
+      console.log('press', condition);
+    }
+  }, [number]);
 
   return (
     <View style={styles.container}>
@@ -25,7 +33,7 @@ const index = () => {
       <Text style={styles.phone}>Phone</Text>
       <TextInput
         style={styles.input}
-        onChangeText={onChangeNumber}
+        onChangeText={val => onChangeNumber(val)}
         value={number}
         placeholder="01*********"
         keyboardType="numeric"
