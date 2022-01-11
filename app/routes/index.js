@@ -2,7 +2,7 @@ import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import WelcomeScreen from '../screens/Welcome';
 import Login from '../screens/Login';
-
+import Verify from '../screens/Verify';
 import {Dimensions} from '../styles';
 import {forSlide} from '../hooks/animation';
 
@@ -22,6 +22,7 @@ const Routes = () => {
       })}>
       <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
       <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Verify" component={Verify} />
     </Stack.Navigator>
   );
 };

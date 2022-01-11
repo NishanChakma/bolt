@@ -25,6 +25,7 @@ export const styles = StyleSheet.create({
     marginBottom: hdp(30),
     width: '85%',
     height: hdp(50),
+    fontSize: hdp(18),
   },
   button: {
     marginTop: hdp(30),

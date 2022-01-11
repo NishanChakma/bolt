@@ -1,6 +1,9 @@
 import React, {useCallback, useState} from 'react';
 import {View, Text, TextInput} from 'react-native';
+import {bindActionCreators} from 'redux';
 import {useNavigation} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
+import {ActionCreators} from '../../store';
 import PhoneNumber from 'awesome-phonenumber';
 import {Header} from '../../components/Header';
 import {CustomButtonWithBG} from '../../components/CustomButton';
@@ -8,8 +11,10 @@ import {CustomButtonWithBG} from '../../components/CustomButton';
 import {styles} from './styles';
 
 const index = () => {
-  const [number, onChangeNumber] = useState('+88');
+  const [number, onChangeNumber] = useState('+8801516114206');
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const {loginAction} = bindActionCreators(ActionCreators, dispatch);
 
   const backButtonPress = useCallback(() => {
     navigation.goBack();
@@ -22,9 +27,9 @@ const index = () => {
     if (!condition) {
       alert('Phone number is invalid!');
     } else {
-      console.log('press', condition);
+      loginAction(navigation);
     }
-  }, [number]);
+  }, [number, loginAction]);
 
   return (
     <View style={styles.container}>
