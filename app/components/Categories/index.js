@@ -30,8 +30,8 @@ const Categories = () => {
 
   const renderItem = useCallback(({item: {id, imageUrl, title}}) => {
     return (
-      <TouchableOpacity style={styles.img} key={id} onPress={() => null}>
-        <Image source={imageUrl} />
+      <TouchableOpacity style={styles.wrap} key={id} onPress={() => null}>
+        <Image style={styles.img} source={imageUrl} />
         <Text style={styles.titleText}>{title}</Text>
       </TouchableOpacity>
     );
@@ -56,15 +56,21 @@ const styles = StyleSheet.create({
     fontSize: hdp(22),
     color: '#434343',
   },
-  imgContainer: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-  img: {
+  wrap: {
     marginRight: wdp(10),
     marginVertical: hdp(10),
     justifyContent: 'center',
     alignItems: 'center',
+    shadowOffset: {width: 10, height: 10},
+    shadowColor: '#000',
+    shadowOpacity: 1,
+    elevation: 6,
+    height: hdp(68),
+  },
+  img: {
+    height: hdp(65),
+    width: wdp(114),
+    borderRadius: hdp(5),
   },
   titleText: {
     position: 'absolute',

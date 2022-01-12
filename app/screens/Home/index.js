@@ -2,6 +2,8 @@ import React from 'react';
 import {View, TouchableOpacity, Image} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Categories from '../../components/Categories';
+import HomeCard from '../../components/HomeCards';
+import {ProductsArr} from './ProductsArr';
 import {styles} from './styles';
 
 const Home = () => {
@@ -15,6 +17,7 @@ const Home = () => {
         />
       </TouchableOpacity>
       <Categories />
+      <HomeCard ProductsArr={ProductsArr} header={'Featured'} />
     </View>
   );
 };
