@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StatusBar, SafeAreaView, StyleSheet, LogBox} from 'react-native';
+import {StatusBar, SafeAreaView, StyleSheet} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import Routes from './routes';
@@ -16,14 +16,6 @@ const MyTheme = {
     background: '#fff',
   },
 };
-
-//nested scrolview warning will be prevent
-LogBox.ignoreLogs([
-  'VirtualizedLists should never be nested inside plain ScrollViews with the same orientation - use another VirtualizedList-backed container instead.',
-]);
-LogBox.ignoreLogs([
-  'VirtualizedLists should never be nested inside plain ScrollViews with the same orientation because it can break windowing and other functionality - use another VirtualizedList-backed container instead.',
-]);
 
 const App = () => {
   useEffect(() => {
