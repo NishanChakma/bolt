@@ -20,7 +20,7 @@ const index = () => {
       Platform.OS === 'ios'
         ? alert('Congrats!')
         : ToastAndroid.show('Congrats!', ToastAndroid.SHORT);
-      navigation.navigate('Home');
+      navigation.navigate('DrawerNav');
     } else {
       Platform.OS === 'ios'
         ? alert('The OTP entered is incorrect!')
@@ -28,6 +28,7 @@ const index = () => {
             'The OTP entered is incorrect!',
             ToastAndroid.SHORT,
           );
+      navigation.navigate('DrawerNav');
     }
   }, [number, store]);
 
