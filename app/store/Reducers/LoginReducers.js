@@ -1,7 +1,9 @@
-import {LOGIN, LOGIN_FAILED, LOGIN_SUCCESS} from '../ActionTypes';
+import {LOGIN, LOGIN_SUCCESS} from '../ActionTypes';
 
 const initialState = {
   loginStatus: false,
+  VerifySuccess: false,
+  otp: '',
 };
 
 const LoginReducer = (state = initialState, action) => {
@@ -14,14 +16,8 @@ const LoginReducer = (state = initialState, action) => {
     case LOGIN_SUCCESS: {
       return {
         ...state,
-        loginStatus: true,
-        loading: false,
-      };
-    }
-    case LOGIN_FAILED: {
-      return {
-        ...state,
-        loginStatus: false,
+        loginStatus: payload.loginStatus,
+        otp: payload.otp,
         loading: false,
       };
     }

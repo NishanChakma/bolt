@@ -7,11 +7,14 @@ import {ActionCreators} from '../../store';
 import PhoneNumber from 'awesome-phonenumber';
 import {Header} from '../../components/Header';
 import {CustomButtonWithBG} from '../../components/CustomButton';
-
+import {CustomModal} from '../../components/Modal';
 import {styles} from './styles';
 
 const index = () => {
   const [number, onChangeNumber] = useState('+8801516114206');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [OTP, setOTP] = useState('');
+
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const {loginAction} = bindActionCreators(ActionCreators, dispatch);
@@ -20,19 +23,28 @@ const index = () => {
     navigation.goBack();
   }, [navigation]);
 
-  const loginPress = useCallback(() => {
+  const loginPress = useCallback(async () => {
     const region = PhoneNumber(number).getRegionCode();
     let checkValid = new PhoneNumber(number, region);
     const condition = checkValid.isValid() && checkValid.isMobile();
     if (!condition) {
       alert('Phone number is invalid!');
     } else {
-      loginAction(navigation);
+      var val = Math.floor(1000 + Math.random() * 9000); //random number
+      setOTP(val.toString());
+      setModalVisible(true);
     }
-  }, [number, loginAction]);
+  }, [number, OTP, modalVisible]);
 
   return (
     <View style={styles.container}>
+      <CustomModal
+        OTP={OTP}
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        loginAction={loginAction}
+        navigation={navigation}
+      />
       <Header onPress={backButtonPress} />
       <Text style={styles.login}>Login</Text>
       <Text style={styles.phone}>Phone</Text>

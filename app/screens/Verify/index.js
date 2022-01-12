@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useState, useEffect} from 'react';
 import {View, Text, TextInput} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Header} from '../../components/Header';
