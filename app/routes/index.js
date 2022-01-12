@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import WelcomeScreen from '../screens/Welcome';
 import Login from '../screens/Login';
 import Verify from '../screens/Verify';
+import Checkout from '../screens/Checkout';
 import DrawerNav from './DrawerNavigation';
 import {Dimensions} from '../styles';
 import {forSlide} from '../hooks/animation';
@@ -25,6 +26,7 @@ const Routes = () => {
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Verify" component={Verify} />
       <Stack.Screen name="DrawerNav" component={DrawerNav} />
+      <Stack.Screen name="Checkout" component={Checkout} />
     </Stack.Navigator>
   );
 };

@@ -7,13 +7,26 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
+import {ActionCreators} from '../../store';
+import {bindActionCreators} from 'redux';
+
 import {hdp, wdp} from '../../styles/Dimensions';
 
 const HomeCard = memo(({ProductsArr, header}) => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const {checkOutAction} = bindActionCreators(ActionCreators, dispatch);
+  const cardPress = useCallback(id => {
+    // checkOutAction(navigation, ProductsArr[id]);
+    navigation.navigate('Checkout');
+  }, []);
+
   const renderItem = useCallback(({item: {id, imageUrl, price, title}}) => {
     return (
       <View style={styles.items} key={id}>
-        <TouchableOpacity onPress={() => null}>
+        <TouchableOpacity onPress={() => cardPress(id)}>
           <Image style={styles.img} source={imageUrl} />
         </TouchableOpacity>
         <Text style={styles.text}>${price}.00</Text>
