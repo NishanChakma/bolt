@@ -56,6 +56,10 @@ const MyReducer = (state = initialState, action) => {
         loading: false,
         verify: action.verify,
         loginStatus: action.loginStatus,
+        checkoutArr: [],
+        otp: '',
+        totalAmount: 0,
+        discount: 0,
       };
     }
     case CHECKOUT: {

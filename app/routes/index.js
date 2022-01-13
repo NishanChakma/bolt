@@ -7,12 +7,15 @@ import Checkout from '../screens/Checkout';
 import DrawerNav from './DrawerNavigation';
 import {Dimensions} from '../styles';
 import {forSlide} from '../hooks/animation';
+import {useSelector} from 'react-redux';
 
 const Stack = createNativeStackNavigator();
 
 const Routes = () => {
+  const checkVerify = useSelector(state => state.MyReducer.verify); //store
   return (
     <Stack.Navigator
+      initialRouteName={checkVerify ? 'DrawerNav' : 'WelcomeScreen'}
       screenOptions={({route}) => ({
         headerShown: false,
         cardStyleInterpolator: forSlide,
