@@ -1,4 +1,4 @@
-# Notify-Device
+# Bolt
 
 #Flow
 
@@ -14,5 +14,8 @@
 10. Checkout page subtotal, discount, shipping, and total data are dynamic.
 
 Note: Due to I used drawer navigation I had to use react native reanimated module. And remote debugger is not supported in reanimated v2. So you have to use flipper to see the console. And reanimated use hermes engine true. It will reduce the app size.
+
+#Note
+And please note, last week my MacBook display has been gone. So I gave it to the service center. They will return my product at the end of the month. So I am unable to check the IOS side. It might be show some packages problems while running the project.
 
 Thank you!
