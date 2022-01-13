@@ -8,32 +8,38 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {ActionCreators} from '../../store';
 import {bindActionCreators} from 'redux';
-
 import {hdp, wdp} from '../../styles/Dimensions';
 
 const HomeCard = memo(({ProductsArr, header}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const {checkOutAction} = bindActionCreators(ActionCreators, dispatch);
+  const store = useSelector(state => state.MyReducer); //store
   const cardPress = useCallback(id => {
-    // checkOutAction(navigation, ProductsArr[id]);
-    navigation.navigate('Checkout');
+    if (store.verify === false) {
+      navigation.navigate('Login');
+    } else {
+      checkOutAction(navigation, ProductsArr[id]);
+    }
   }, []);
 
-  const renderItem = useCallback(({item: {id, imageUrl, price, title}}) => {
-    return (
-      <View style={styles.items} key={id}>
-        <TouchableOpacity onPress={() => cardPress(id)}>
-          <Image style={styles.img} source={imageUrl} />
-        </TouchableOpacity>
-        <Text style={styles.text}>${price}.00</Text>
-        <Text style={styles.text}>{title}</Text>
-      </View>
-    );
-  }, []);
+  const renderItem = useCallback(
+    ({item: {id, imageUrl, price, title, uniqId}}) => {
+      return (
+        <View style={styles.items} key={uniqId}>
+          <TouchableOpacity onPress={() => cardPress(id)}>
+            <Image style={styles.img} source={imageUrl} />
+          </TouchableOpacity>
+          <Text style={styles.text}>${price}.00</Text>
+          <Text style={styles.text}>{title}</Text>
+        </View>
+      );
+    },
+    [],
+  );
 
   return (
     <View>

@@ -4,12 +4,13 @@ import {useNavigation} from '@react-navigation/native';
 import {Header} from '../../components/Header';
 import CheckoutCard from '../../components/CheckoutCard';
 import {Footer} from './CheckoutFooter';
+import {useSelector} from 'react-redux';
 import {styles} from './styles';
-import {ProductsArr} from '../Home/ProductsArr';
 
 const CheckOut = () => {
   const [checked, setChecked] = useState(true);
   const navigation = useNavigation();
+  const checkOutStore = useSelector(state => state.MyReducer.checkoutArr); //store
 
   //return homepage if you didn't click the checkout button within 20 seconds
   useEffect(() => {
@@ -30,9 +31,9 @@ const CheckOut = () => {
       <Header onPress={backButtonPress} />
       <Text style={styles.checkOut}>Checkout</Text>
       <FlatList
-        data={ProductsArr}
+        data={checkOutStore}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.uniqId}
         showsVerticalScrollIndicator={false}
         ListFooterComponent={<Footer setChecked={setChecked} />}
       />

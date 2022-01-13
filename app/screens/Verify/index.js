@@ -3,13 +3,17 @@ import {View, Text, TextInput, Platform, ToastAndroid} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Header} from '../../components/Header';
 import {CustomButtonWithBG} from '../../components/CustomButton';
-import {useSelector} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {ActionCreators} from '../../store';
 import {styles} from '../Login/styles';
 
 const index = () => {
   const [number, onChangeNumber] = useState('');
   const navigation = useNavigation();
-  const store = useSelector(state => state.LoginReducer); //store
+  const store = useSelector(state => state.MyReducer); //store
+  const dispatch = useDispatch();
+  const {verifyAction} = bindActionCreators(ActionCreators, dispatch);
 
   const backButtonPress = useCallback(() => {
     navigation.goBack();
@@ -20,6 +24,7 @@ const index = () => {
       Platform.OS === 'ios'
         ? alert('Congrats!')
         : ToastAndroid.show('Congrats!', ToastAndroid.SHORT);
+      verifyAction();
       navigation.navigate('DrawerNav');
     } else {
       Platform.OS === 'ios'
@@ -28,7 +33,6 @@ const index = () => {
             'The OTP entered is incorrect!',
             ToastAndroid.SHORT,
           );
-      navigation.navigate('DrawerNav');
     }
   }, [number, store]);
 

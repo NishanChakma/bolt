@@ -9,7 +9,9 @@ const index = () => {
   const onPress = useCallback(() => {
     navigation.navigate('Login');
   }, []);
-
+  const gotToHome = useCallback(() => {
+    navigation.navigate('DrawerNav');
+  }, []);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to Bolt</Text>
@@ -22,7 +24,7 @@ const index = () => {
         buttonPress={onPress}
         title={'Login with phone'}
       />
-      <TouchableOpacity style={styles.touchable} onPress={() => alert('1')}>
+      <TouchableOpacity style={styles.touchable} onPress={gotToHome}>
         <Text style={styles.shopWithUs}>Shop with us</Text>
       </TouchableOpacity>
     </View>

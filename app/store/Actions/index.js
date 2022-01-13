@@ -1,4 +1,4 @@
-import {LOGIN, CHECKOUT} from '../ActionTypes';
+import {LOGIN, CHECKOUT, VERIFY, LOGOUT} from '../ActionTypes';
 
 export const loginAction = (navigation, otp) => {
   return {
@@ -13,5 +13,18 @@ export const checkOutAction = (navigation, item) => {
     type: CHECKOUT,
     navigation: navigation,
     item: item,
+  };
+};
+
+export const verifyAction = () => {
+  return {
+    type: VERIFY,
+  };
+};
+
+export const LogOut = navigation => {
+  return {
+    type: LOGOUT,
+    navigation: navigation,
   };
 };

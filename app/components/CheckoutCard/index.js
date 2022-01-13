@@ -4,7 +4,7 @@ import {styles} from './styles';
 import {MinusIcon, PlusIcon} from '../../assests/svg';
 
 const CheckoutCard = memo(
-  ({item: {id, imageUrl, price, company, title, count}}) => {
+  ({item: {id, imageUrl, price, company, title, counter}}) => {
     return (
       <View style={styles.container} key={id}>
         <View style={styles.imgContainer}>
@@ -18,7 +18,7 @@ const CheckoutCard = memo(
             <TouchableOpacity style={styles.touch} onPress={() => alert('ok')}>
               <MinusIcon />
             </TouchableOpacity>
-            <Text style={styles.number}>{count ?? 1}</Text>
+            <Text style={styles.number}>{counter}</Text>
             <TouchableOpacity style={styles.touch} onPress={() => alert('ok')}>
               <PlusIcon />
             </TouchableOpacity>

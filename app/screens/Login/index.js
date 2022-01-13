@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from 'react';
 import {View, Text, TextInput} from 'react-native';
-import {bindActionCreators} from 'redux';
 import {useNavigation} from '@react-navigation/native';
+import {bindActionCreators} from 'redux';
 import {useDispatch} from 'react-redux';
 import {ActionCreators} from '../../store';
 import PhoneNumber from 'awesome-phonenumber';

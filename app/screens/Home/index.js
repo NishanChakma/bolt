@@ -1,13 +1,47 @@
-import React from 'react';
-import {View, TouchableOpacity, Image, ScrollView} from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  BackHandler,
+  Alert,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Categories from '../../components/Categories';
 import HomeCard from '../../components/HomeCards';
 import {ProductsArr, BestSell} from './ProductsArr';
+import {bindActionCreators} from 'redux';
+import {useDispatch} from 'react-redux';
+import {ActionCreators} from '../../store';
 import {styles} from './styles';
 
 const Home = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const {LogOut} = bindActionCreators(ActionCreators, dispatch);
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert('Hold on!', 'Are you sure you want to LOGOUT?', [
+        {
+          text: 'Cancel',
+          onPress: () => null,
+          style: 'cancel',
+        },
+        {
+          text: 'YES',
+          onPress: () => LogOut(navigation),
+        },
+      ]);
+      return true;
+    };
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+    return () => backHandler.remove();
+  }, []);
+
   return (
     <ScrollView style={styles.container}>
       <TouchableOpacity onPress={() => navigation.openDrawer()}>
