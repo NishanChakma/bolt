@@ -12,7 +12,7 @@ import {useSelector} from 'react-redux';
 const Stack = createNativeStackNavigator();
 
 const Routes = () => {
-  const checkVerify = useSelector(state => state.MyReducer.verify); //store
+  const checkVerify = useSelector(state => state.AuthReducer.verify); //store
   return (
     <Stack.Navigator
       initialRouteName={checkVerify ? 'DrawerNav' : 'WelcomeScreen'}

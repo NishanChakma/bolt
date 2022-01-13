@@ -17,22 +17,25 @@ const HomeCard = memo(({ProductsArr, header}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const {checkOutAction} = bindActionCreators(ActionCreators, dispatch);
-  const store = useSelector(state => state.MyReducer); //store
-  console.log('Verify++++++++++++ : ', store.verify);
-  const CardPress = id => {
-    console.log('Verify :----------- ', store.verify);
-    if (store.verify == false) {
-      navigation.navigate('Login');
-    } else {
-      checkOutAction(navigation, ProductsArr[id]);
-    }
-  };
+  const store = useSelector(state => state.AuthReducer); //store
+  // console.log('Verify++++++++++++ : ', store.verify);
+  const onPressHandle = useCallback(
+    id => {
+      // console.log('Verify :----------- ', store.verify);
+      if (store.verify == false) {
+        navigation.navigate('Login');
+      } else {
+        checkOutAction(navigation, ProductsArr[id]);
+      }
+    },
+    [store, ProductsArr],
+  );
 
   const renderItem = useCallback(
     ({item: {id, imageUrl, price, title, uniqId}}) => {
       return (
         <View style={styles.items} key={uniqId}>
-          <TouchableOpacity onPress={() => CardPress(id)}>
+          <TouchableOpacity onPress={() => onPressHandle(id)}>
             <Image style={styles.img} source={imageUrl} />
           </TouchableOpacity>
           <Text style={styles.text}>${price}.00</Text>
@@ -40,7 +43,7 @@ const HomeCard = memo(({ProductsArr, header}) => {
         </View>
       );
     },
-    [],
+    [store, ProductsArr],
   );
 
   return (

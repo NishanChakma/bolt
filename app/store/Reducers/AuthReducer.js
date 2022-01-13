@@ -1,14 +1,10 @@
 import {
   LOGIN,
   LOGIN_SUCCESS,
-  CHECKOUT,
-  CHECKOUT_SUCCESS,
   VERIFY,
   VERIFY_SUCCESS,
   LOGOUT,
   LOGOUT_SUCCESS,
-  COUNTER,
-  DELETE_ITEM,
 } from '../ActionTypes';
 
 const initialState = {
@@ -18,7 +14,7 @@ const initialState = {
   checkoutArr: [],
 };
 
-const MyReducer = (state = initialState, action) => {
+const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN:
       return {
@@ -58,44 +54,13 @@ const MyReducer = (state = initialState, action) => {
         loading: false,
         verify: action.verify,
         loginStatus: action.loginStatus,
-        checkoutArr: [],
         otp: '',
-        totalAmount: 0,
-        discount: 0,
-      };
-    }
-    case CHECKOUT: {
-      return {
-        ...state,
-        loading: true,
-      };
-    }
-    case CHECKOUT_SUCCESS: {
-      return {
-        ...state,
-        loading: false,
-        checkoutArr: action.checkOutArray,
-        totalAmount: action.totalAmount,
-        discount: action.discount,
       };
     }
 
-    case COUNTER: {
-      return {
-        ...state,
-        loading: true,
-      };
-    }
-
-    case DELETE_ITEM: {
-      return {
-        ...state,
-        loading: true,
-      };
-    }
     default:
       return state;
   }
 };
 
-export default MyReducer;
+export default AuthReducer;

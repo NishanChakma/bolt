@@ -5,9 +5,12 @@ import {useSelector} from 'react-redux';
 import {styles} from './styles';
 
 export const Footer = memo(({setChecked}) => {
-  const store = useSelector(state => state.MyReducer); //store
+  const store = useSelector(state => state.CheckoutReducer); //store
   const total = useMemo(
-    () => parseFloat(store.discount) + parseFloat(10),
+    () =>
+      store.discount === '0.00'
+        ? 0
+        : parseFloat(store.discount) + parseFloat(10),
     [store],
   );
   return (

@@ -11,7 +11,7 @@ import Categories from '../../components/Categories';
 import HomeCard from '../../components/HomeCards';
 import {ProductsArr, BestSell} from './ProductsArr';
 import {bindActionCreators} from 'redux';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {ActionCreators} from '../../store';
 import {styles} from './styles';
 
@@ -19,20 +19,25 @@ const Home = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const {LogOut} = bindActionCreators(ActionCreators, dispatch);
+  const verify = useSelector(state => state.AuthReducer.verify); //store
 
   useEffect(() => {
     const backAction = () => {
-      Alert.alert('Hold on!', 'Are you sure you want to LOGOUT?', [
-        {
-          text: 'Cancel',
-          onPress: () => null,
-          style: 'cancel',
-        },
-        {
-          text: 'YES',
-          onPress: () => LogOut(navigation),
-        },
-      ]);
+      Alert.alert(
+        'Hold on!',
+        verify ? 'Are you sure you want to LOGOUT?' : 'Go to Login',
+        [
+          {
+            text: 'Cancel',
+            onPress: () => null,
+            style: 'cancel',
+          },
+          {
+            text: 'YES',
+            onPress: () => LogOut(navigation),
+          },
+        ],
+      );
       return true;
     };
     const backHandler = BackHandler.addEventListener(

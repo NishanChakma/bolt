@@ -10,7 +10,7 @@ import {styles} from './styles';
 const CheckOut = () => {
   const [checked, setChecked] = useState(true);
   const navigation = useNavigation();
-  const checkOutStore = useSelector(state => state.MyReducer.checkoutArr); //store
+  const checkOutStore = useSelector(state => state.CheckoutReducer.checkoutArr); //store
 
   //return homepage if you didn't click the checkout button within 20 seconds
   //it could be done using redux also. But i used this simplest way.

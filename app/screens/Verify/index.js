@@ -11,7 +11,7 @@ import {styles} from '../Login/styles';
 const index = () => {
   const [number, onChangeNumber] = useState('');
   const navigation = useNavigation();
-  const store = useSelector(state => state.MyReducer); //store
+  const store = useSelector(state => state.AuthReducer); //store
   const dispatch = useDispatch();
   const {verifyAction} = bindActionCreators(ActionCreators, dispatch);
 
@@ -20,6 +20,10 @@ const index = () => {
   }, [navigation]);
 
   const VerifyPress = useCallback(() => {
+    if (number === '') {
+      alert('Please enter you OTP');
+      return;
+    }
     if (number === store.otp) {
       Platform.OS === 'ios'
         ? alert('Congrats!')

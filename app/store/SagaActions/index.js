@@ -13,7 +13,7 @@ import {
   DELETE_ITEM,
 } from '../ActionTypes';
 import {select} from 'redux-saga/effects';
-
+import {ProductsArr, BestSell} from '../../screens/Home/ProductsArr';
 // watchers
 function* rootSaga() {
   yield take(REHYDRATE);
@@ -50,12 +50,19 @@ function* logoutAction({navigation}) {
     verify: false,
     loginStatus: false,
   };
+  const res = {
+    type: CHECKOUT_SUCCESS,
+    checkOutArray: [],
+    totalAmount: 0,
+    discount: 0,
+  };
   yield put(payload);
+  yield put(res);
   navigation.navigate('WelcomeScreen');
 }
 
 function* checkOutAction({navigation, item}) {
-  const getItems = state => state.MyReducer.checkoutArr;
+  const getItems = state => state.CheckoutReducer.checkoutArr;
   const state = yield select(getItems);
   let checkOutArray = [];
   if (state.length > 0) {
@@ -92,8 +99,10 @@ function* checkOutAction({navigation, item}) {
 }
 
 function* counterAction(item) {
-  const getItems = state => state.MyReducer.checkoutArr;
+  const getItems = state => state.CheckoutReducer.checkoutArr;
   const state = yield select(getItems);
+  const mainArr = [...ProductsArr, ...BestSell];
+  const filterArr = mainArr.filter(a => a.uniqId === item.id);
   let checkOutArray = [];
   if (state.length > 0) {
     const newArr = yield state.map(obj => {
@@ -102,14 +111,14 @@ function* counterAction(item) {
           return {
             ...obj,
             counter: obj.counter + 1,
-            price: obj.price + item.price,
+            price: obj.price + filterArr[0].price,
           };
         } else {
           if (obj.counter > 1) {
             return {
               ...obj,
               counter: obj.counter - 1,
-              price: obj.price - item.price,
+              price: obj.price - filterArr[0].price,
             };
           }
         }
@@ -130,7 +139,7 @@ function* counterAction(item) {
 }
 
 function* deleteAction(item) {
-  const getItems = state => state.MyReducer.checkoutArr;
+  const getItems = state => state.CheckoutReducer.checkoutArr;
   const state = yield select(getItems);
   const checkOutArray = state.filter(res => res.uniqId !== item.id);
   const tAmount = yield totalAmount(checkOutArray);
@@ -143,6 +152,7 @@ function* deleteAction(item) {
   };
   yield put(setCheckoutStore);
 }
+
 const discount = async totalAmount => {
   const discountPercent = 5;
   const discountCal = totalAmount - (totalAmount * discountPercent) / 100;

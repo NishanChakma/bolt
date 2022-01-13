@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux';
 
 //Import all reducers in here
-import MyReducer from './MyReducer';
+import AuthReducer from './AuthReducer';
+import CheckoutReducer from './CheckoutReducer';
 
 export default combineReducers({
-  MyReducer,
+  AuthReducer,
+  CheckoutReducer,
 });
