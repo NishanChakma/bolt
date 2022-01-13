@@ -13,19 +13,20 @@ import {ProductsArr, BestSell} from './ProductsArr';
 import {bindActionCreators} from 'redux';
 import {useDispatch, useSelector} from 'react-redux';
 import {ActionCreators} from '../../store';
+import Loader from '../LoadingScreen';
 import {styles} from './styles';
 
 const Home = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const {LogOut} = bindActionCreators(ActionCreators, dispatch);
-  const verify = useSelector(state => state.AuthReducer.verify); //store
+  const store = useSelector(state => state.AuthReducer); //store
 
   useEffect(() => {
     const backAction = () => {
       Alert.alert(
         'Hold on!',
-        verify ? 'Are you sure you want to LOGOUT?' : 'Go to Login',
+        store.verify ? 'Are you sure you want to LOGOUT?' : 'Go to Login',
         [
           {
             text: 'Cancel',
@@ -46,6 +47,10 @@ const Home = () => {
     );
     return () => backHandler.remove();
   }, []);
+
+  if (store.loading) {
+    <Loader />;
+  }
 
   return (
     <ScrollView style={styles.container}>

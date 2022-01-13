@@ -6,6 +6,7 @@ import {CustomButtonWithBG} from '../../components/CustomButton';
 import {bindActionCreators} from 'redux';
 import {useDispatch, useSelector} from 'react-redux';
 import {ActionCreators} from '../../store';
+import Loader from '../LoadingScreen';
 import {styles} from '../Login/styles';
 
 const index = () => {
@@ -40,6 +41,9 @@ const index = () => {
     }
   }, [number, store]);
 
+  if (store.loading) {
+    <Loader />;
+  }
   return (
     <View style={styles.container}>
       <Header onPress={backButtonPress} />

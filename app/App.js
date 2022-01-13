@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {StatusBar, SafeAreaView, StyleSheet} from 'react-native';
-import SplashScreen from 'react-native-splash-screen';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import Routes from './routes';
 //import redux
@@ -18,10 +17,6 @@ const MyTheme = {
 };
 
 const App = () => {
-  useEffect(() => {
-    SplashScreen.hide();
-  }, []);
-
   return (
     <SafeAreaView style={styles.globalContainer}>
       <StatusBar backgroundColor="#fff" barStyle="dark-content" />

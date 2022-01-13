@@ -1,10 +1,14 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {CustomButtonWithBG} from '../../components/CustomButton';
+import SplashScreen from 'react-native-splash-screen';
 import {styles} from './styles';
 
 const index = () => {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   const navigation = useNavigation();
   const onPress = useCallback(() => {
     navigation.navigate('Login');

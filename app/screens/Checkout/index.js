@@ -5,12 +5,13 @@ import {Header} from '../../components/Header';
 import CheckoutCard from '../../components/CheckoutCard';
 import {Footer} from './CheckoutFooter';
 import {useSelector} from 'react-redux';
+import Loader from '../LoadingScreen';
 import {styles} from './styles';
 
 const CheckOut = () => {
   const [checked, setChecked] = useState(true);
   const navigation = useNavigation();
-  const checkOutStore = useSelector(state => state.CheckoutReducer.checkoutArr); //store
+  const store = useSelector(state => state.CheckoutReducer); //store
 
   //return homepage if you didn't click the checkout button within 20 seconds
   //it could be done using redux also. But i used this simplest way.
@@ -27,12 +28,16 @@ const CheckOut = () => {
     return <CheckoutCard item={item} />;
   }, []);
 
+  if (store.loading) {
+    <Loader />;
+  }
+
   return (
     <View style={styles.container}>
       <Header onPress={backButtonPress} />
       <Text style={styles.checkOut}>Checkout</Text>
       <FlatList
-        data={checkOutStore}
+        data={store.checkoutArr}
         renderItem={renderItem}
         keyExtractor={item => item.uniqId}
         showsVerticalScrollIndicator={false}
