@@ -13,6 +13,7 @@
 9. In checkout if you didn't click the Checkout button within 20 seconds it will redirect to the homepage.
 10. Checkout page has an increase and decreases counter. You can also delete the item.
 11. Checkout page subtotal, discount, shipping, and total data are dynamic.
+12. I used redux persists to store the session. So once you logged in you will be still logged in until you click log out. And the checkout data will also be stored in local storage.
 
 Note: Due to I used drawer navigation I had to use react native reanimated module. And remote debugger is not supported in reanimated v2. So you have to use flipper to see the console. And reanimated use hermes engine true. It will reduce the app size.
 
