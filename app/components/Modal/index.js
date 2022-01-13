@@ -75,5 +75,6 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: 'center',
+    color: '#2C2C2C',
   },
 });

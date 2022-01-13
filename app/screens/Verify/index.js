@@ -55,6 +55,7 @@ const index = () => {
         value={number}
         placeholder="Enter or paste your OTP"
         keyboardType="numeric"
+        placeholderTextColor="#747474"
       />
       <CustomButtonWithBG
         style={styles.button}

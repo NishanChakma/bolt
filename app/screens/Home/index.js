@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useCallback} from 'react';
 import {
   TouchableOpacity,
   Image,
@@ -21,6 +21,13 @@ const Home = () => {
   const dispatch = useDispatch();
   const {LogOut} = bindActionCreators(ActionCreators, dispatch);
   const store = useSelector(state => state.AuthReducer); //store
+  const backPress = useCallback(() => {
+    if (store.verify) {
+      LogOut(navigation);
+    } else {
+      navigation.navigate('Login');
+    }
+  }, [store]);
 
   useEffect(() => {
     const backAction = () => {
@@ -35,7 +42,7 @@ const Home = () => {
           },
           {
             text: 'YES',
-            onPress: () => LogOut(navigation),
+            onPress: backPress,
           },
         ],
       );
@@ -46,7 +53,7 @@ const Home = () => {
       backAction,
     );
     return () => backHandler.remove();
-  }, []);
+  }, [store]);
 
   if (store.loading) {
     <Loader />;

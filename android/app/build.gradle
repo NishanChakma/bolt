@@ -125,17 +125,33 @@ def enableHermes = project.ext.react.get("enableHermes", true);
  */
 def nativeArchitectures = project.getProperties().get("reactNativeDebugArchitectures")
 
+public class Version {
+    private final static int VERSION_BUILD = 0;
+    private final static int VERSION_MAJOR = 0;
+    private final static int VERSION_MINOR = 11;
+    public static int getVersionCode() {
+        return VERSION_BUILD * 1000 * 1000 + VERSION_MAJOR * 1000 + VERSION_MINOR;
+    }
+
+    public static String getVersionName() {
+        return VERSION_BUILD + "." + VERSION_MAJOR + "." + VERSION_MINOR;
+    }
+}
+
 android {
     ndkVersion rootProject.ext.ndkVersion
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+    archivesBaseName = "Bolt_" + Version.getVersionName()
+
     defaultConfig {
         applicationId "com.bolt"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode Version.getVersionCode()
+        versionName Version.getVersionName()
+        multiDexEnabled true
     }
     splits {
         abi {

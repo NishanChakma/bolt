@@ -11,7 +11,7 @@ import {CustomModal} from '../../components/Modal';
 import {styles} from './styles';
 
 const index = () => {
-  const [number, onChangeNumber] = useState('+8801516114206');
+  const [number, onChangeNumber] = useState('+8801711111111');
   const [modalVisible, setModalVisible] = useState(false);
   const [OTP, setOTP] = useState('');
 
@@ -52,8 +52,9 @@ const index = () => {
         style={styles.input}
         onChangeText={val => onChangeNumber(val)}
         value={number}
-        placeholder="01*********"
+        placeholder="Ex: +8801*********"
         keyboardType="numeric"
+        placeholderTextColor="#747474"
       />
       <CustomButtonWithBG
         style={styles.button}

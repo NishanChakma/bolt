@@ -26,6 +26,7 @@ export const styles = StyleSheet.create({
     width: '85%',
     height: hdp(50),
     fontSize: hdp(18),
+    color: '#2C2C2C',
   },
   button: {
     marginTop: hdp(30),
