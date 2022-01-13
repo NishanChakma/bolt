@@ -1,4 +1,11 @@
-import {LOGIN, CHECKOUT, VERIFY, LOGOUT} from '../ActionTypes';
+import {
+  LOGIN,
+  CHECKOUT,
+  VERIFY,
+  LOGOUT,
+  COUNTER,
+  DELETE_ITEM,
+} from '../ActionTypes';
 
 export const loginAction = (navigation, otp) => {
   return {
@@ -26,5 +33,21 @@ export const LogOut = navigation => {
   return {
     type: LOGOUT,
     navigation: navigation,
+  };
+};
+
+export const counterAction = (param, uniqId, price) => {
+  return {
+    type: COUNTER,
+    param: param,
+    id: uniqId,
+    price: price,
+  };
+};
+
+export const deleteAction = id => {
+  return {
+    type: DELETE_ITEM,
+    id: id,
   };
 };

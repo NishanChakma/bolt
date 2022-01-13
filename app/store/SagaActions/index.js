@@ -9,6 +9,8 @@ import {
   VERIFY_SUCCESS,
   LOGOUT,
   LOGOUT_SUCCESS,
+  COUNTER,
+  DELETE_ITEM,
 } from '../ActionTypes';
 import {select} from 'redux-saga/effects';
 
@@ -19,6 +21,8 @@ function* rootSaga() {
   yield takeEvery(CHECKOUT, checkOutAction);
   yield takeEvery(VERIFY, verifyAction);
   yield takeEvery(LOGOUT, logoutAction);
+  yield takeEvery(COUNTER, counterAction);
+  yield takeEvery(DELETE_ITEM, deleteAction);
 }
 
 //workers
@@ -75,20 +79,78 @@ function* checkOutAction({navigation, item}) {
   } else {
     checkOutArray.push(item); //new item
   }
-  //total amount calculation
-  const totalAmout = checkOutArray.reduce((a, {price}) => a + price, 0);
-  //discount
-  const discountPercent = 5;
-  const discountCal = totalAmout - (totalAmout * discountPercent) / 100;
-  const discount = discountCal.toFixed(2);
+  const tAmount = yield totalAmount(checkOutArray);
+  const tDiscount = yield discount(tAmount);
   const setCheckoutStore = {
     type: CHECKOUT_SUCCESS,
     checkOutArray: checkOutArray,
-    totalAmout: totalAmout,
-    discount: discount,
+    totalAmount: tAmount,
+    discount: tDiscount,
   };
   yield put(setCheckoutStore);
   navigation.navigate('Checkout');
 }
 
+function* counterAction(item) {
+  const getItems = state => state.MyReducer.checkoutArr;
+  const state = yield select(getItems);
+  let checkOutArray = [];
+  if (state.length > 0) {
+    const newArr = yield state.map(obj => {
+      if (obj.uniqId === item.id) {
+        if (item.param === 'plus') {
+          return {
+            ...obj,
+            counter: obj.counter + 1,
+            price: obj.price + item.price,
+          };
+        } else {
+          if (obj.counter > 1) {
+            return {
+              ...obj,
+              counter: obj.counter - 1,
+              price: obj.price - item.price,
+            };
+          }
+        }
+      }
+      return obj;
+    });
+    checkOutArray = newArr;
+  }
+  const tAmount = yield totalAmount(checkOutArray);
+  const tDiscount = yield discount(tAmount);
+  const setCheckoutStore = {
+    type: CHECKOUT_SUCCESS,
+    checkOutArray: checkOutArray,
+    totalAmount: tAmount,
+    discount: tDiscount,
+  };
+  yield put(setCheckoutStore);
+}
+
+function* deleteAction(item) {
+  const getItems = state => state.MyReducer.checkoutArr;
+  const state = yield select(getItems);
+  const checkOutArray = state.filter(res => res.uniqId !== item.id);
+  const tAmount = yield totalAmount(checkOutArray);
+  const tDiscount = yield discount(tAmount);
+  const setCheckoutStore = {
+    type: CHECKOUT_SUCCESS,
+    checkOutArray: checkOutArray,
+    totalAmount: tAmount,
+    discount: tDiscount,
+  };
+  yield put(setCheckoutStore);
+}
+const discount = async totalAmount => {
+  const discountPercent = 5;
+  const discountCal = totalAmount - (totalAmount * discountPercent) / 100;
+  return discountCal.toFixed(2);
+};
+
+const totalAmount = async checkOutArray => {
+  const totalAmount = await checkOutArray.reduce((a, {price}) => a + price, 0);
+  return totalAmount;
+};
 export default rootSaga;

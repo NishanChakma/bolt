@@ -18,19 +18,21 @@ const HomeCard = memo(({ProductsArr, header}) => {
   const dispatch = useDispatch();
   const {checkOutAction} = bindActionCreators(ActionCreators, dispatch);
   const store = useSelector(state => state.MyReducer); //store
-  const cardPress = useCallback(id => {
-    if (store.verify === false) {
+  console.log('Verify++++++++++++ : ', store.verify);
+  const CardPress = id => {
+    console.log('Verify :----------- ', store.verify);
+    if (store.verify == false) {
       navigation.navigate('Login');
     } else {
       checkOutAction(navigation, ProductsArr[id]);
     }
-  }, []);
+  };
 
   const renderItem = useCallback(
     ({item: {id, imageUrl, price, title, uniqId}}) => {
       return (
         <View style={styles.items} key={uniqId}>
-          <TouchableOpacity onPress={() => cardPress(id)}>
+          <TouchableOpacity onPress={() => CardPress(id)}>
             <Image style={styles.img} source={imageUrl} />
           </TouchableOpacity>
           <Text style={styles.text}>${price}.00</Text>

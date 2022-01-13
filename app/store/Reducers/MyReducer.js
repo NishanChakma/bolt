@@ -7,6 +7,8 @@ import {
   VERIFY_SUCCESS,
   LOGOUT,
   LOGOUT_SUCCESS,
+  COUNTER,
+  DELETE_ITEM,
 } from '../ActionTypes';
 
 const initialState = {
@@ -73,8 +75,22 @@ const MyReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         checkoutArr: action.checkOutArray,
-        totalAmount: action.totalAmout,
+        totalAmount: action.totalAmount,
         discount: action.discount,
+      };
+    }
+
+    case COUNTER: {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
+
+    case DELETE_ITEM: {
+      return {
+        ...state,
+        loading: true,
       };
     }
     default:
