@@ -20,12 +20,16 @@
 -android version control
 -splash screen
 -animation
+-javascript svg
+-array addition
 -array update
 -array delete
 -validations
 -loading screen
 -redux-saga combine with redux-thunk
 -redux persists with logger
+-Auth session
+-dynamic route
 -stack navigation with drawer navigation and many more
 
 Note: Due to I used drawer navigation I had to use react native reanimated module. And remote debugger is not supported in reanimated v2. So you have to use flipper to see the console. And reanimated use hermes engine true. It will reduce the app size.

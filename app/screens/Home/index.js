@@ -27,7 +27,7 @@ const Home = () => {
     } else {
       navigation.navigate('Login');
     }
-  }, [store]);
+  }, [store, navigation]);
 
   useEffect(() => {
     const backAction = () => {
@@ -53,7 +53,7 @@ const Home = () => {
       backAction,
     );
     return () => backHandler.remove();
-  }, [store]);
+  }, [store, navigation]);
 
   if (store.loading) {
     <Loader />;
