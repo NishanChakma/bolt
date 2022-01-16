@@ -9,16 +9,8 @@ import Loader from '../LoadingScreen';
 import {styles} from './styles';
 
 const CheckOut = () => {
-  const [checked, setChecked] = useState(true);
   const navigation = useNavigation();
   const store = useSelector(state => state.CheckoutReducer); //store
-
-  //return homepage if you didn't click the checkout button within 20 seconds
-  //it could be done using redux also. But i used this simplest way.
-  useEffect(() => {
-    const timer = setTimeout(() => checked && backButtonPress(), 20000);
-    return () => clearTimeout(timer);
-  });
 
   const backButtonPress = useCallback(() => {
     navigation.goBack();
@@ -41,7 +33,7 @@ const CheckOut = () => {
         renderItem={renderItem}
         keyExtractor={item => item.uniqId}
         showsVerticalScrollIndicator={false}
-        ListFooterComponent={<Footer setChecked={setChecked} />}
+        ListFooterComponent={<Footer />}
       />
     </View>
   );

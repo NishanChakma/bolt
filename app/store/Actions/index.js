@@ -5,6 +5,7 @@ import {
   LOGOUT,
   COUNTER,
   DELETE_ITEM,
+  STOP_GOBACK,
 } from '../ActionTypes';
 
 export const loginAction = (navigation, otp) => {
@@ -49,5 +50,13 @@ export const deleteAction = id => {
   return {
     type: DELETE_ITEM,
     id: id,
+  };
+};
+
+export const stopGobackAction = (param, navigation) => {
+  return {
+    type: STOP_GOBACK,
+    param: param,
+    navigation: navigation,
   };
 };

@@ -6,7 +6,11 @@ import {
   BackHandler,
   Alert,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {
+  useNavigation,
+  useRoute,
+  useFocusEffect,
+} from '@react-navigation/native';
 import Categories from '../../components/Categories';
 import HomeCard from '../../components/HomeCards';
 import {ProductsArr, BestSell} from './ProductsArr';
@@ -29,31 +33,42 @@ const Home = () => {
     }
   }, [store, navigation]);
 
-  useEffect(() => {
-    const backAction = () => {
-      Alert.alert(
-        'Hold on!',
-        store.verify ? 'Are you sure you want to LOGOUT?' : 'Go to Login',
-        [
-          {
-            text: 'Cancel',
-            onPress: () => null,
-            style: 'cancel',
-          },
-          {
-            text: 'YES',
-            onPress: backPress,
-          },
-        ],
+  const route = useRoute();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const backAction = () => {
+        if (route.name === 'Home') {
+          Alert.alert(
+            'Hold on!',
+            store.verify ? 'Are you sure you want to LOGOUT?' : 'Go to Login',
+            [
+              {
+                text: 'Cancel',
+                onPress: () => null,
+                style: 'cancel',
+              },
+              {
+                text: 'YES',
+                onPress: backPress,
+              },
+            ],
+          );
+          return true;
+        } else {
+          navigation.navigate.goBack();
+          return false;
+        }
+      };
+
+      const backHandler = BackHandler.addEventListener(
+        'hardwareBackPress',
+        backAction,
       );
-      return true;
-    };
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction,
-    );
-    return () => backHandler.remove();
-  }, [store, navigation]);
+
+      return () => backHandler.remove();
+    }, [store, navigation]),
+  );
 
   if (store.loading) {
     <Loader />;

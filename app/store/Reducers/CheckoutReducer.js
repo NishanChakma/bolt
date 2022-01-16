@@ -1,8 +1,17 @@
-import {CHECKOUT, CHECKOUT_SUCCESS, COUNTER, DELETE_ITEM} from '../ActionTypes';
+import {
+  CHECKOUT,
+  CHECKOUT_SUCCESS,
+  COUNTER,
+  DELETE_ITEM,
+  STOP_GOBACK,
+  STOP_GOBACK_SUCCESS,
+} from '../ActionTypes';
 
 const initialState = {
   loginStatus: false,
   checkoutArr: [],
+  counterCheck: false,
+  checked: true,
 };
 
 const CheckoutReducer = (state = initialState, action) => {
@@ -34,6 +43,19 @@ const CheckoutReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+      };
+    }
+    case STOP_GOBACK: {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
+    case STOP_GOBACK_SUCCESS: {
+      return {
+        ...state,
+        checked: action.checked,
+        loading: false,
       };
     }
     default:

@@ -1,11 +1,15 @@
 import React, {memo, useMemo} from 'react';
 import {Text, View} from 'react-native';
 import {CustomButtonWithBG} from '../../components/CustomButton';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {ActionCreators} from '../../store';
 import {styles} from './styles';
 
-export const Footer = memo(({setChecked}) => {
+export const Footer = memo(() => {
   const store = useSelector(state => state.CheckoutReducer); //store
+  const dispatch = useDispatch();
+  const {stopGobackAction} = bindActionCreators(ActionCreators, dispatch);
   const total = useMemo(
     () =>
       store.discount === '0.00'
@@ -38,7 +42,7 @@ export const Footer = memo(({setChecked}) => {
       </View>
       <CustomButtonWithBG
         style={styles.button}
-        buttonPress={() => setChecked(false)}
+        buttonPress={() => stopGobackAction(false)}
         title={'Checkout'}
         width={'100%'}
       />

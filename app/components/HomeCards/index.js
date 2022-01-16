@@ -16,7 +16,10 @@ import {hdp, wdp} from '../../styles/Dimensions';
 const HomeCard = memo(({ProductsArr, header}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const {checkOutAction} = bindActionCreators(ActionCreators, dispatch);
+  const {checkOutAction, stopGobackAction} = bindActionCreators(
+    ActionCreators,
+    dispatch,
+  );
   const store = useSelector(state => state.AuthReducer); //store
   // console.log('Verify++++++++++++ : ', store.verify);
   const onPressHandle = useCallback(
@@ -25,6 +28,7 @@ const HomeCard = memo(({ProductsArr, header}) => {
       if (store.verify == false) {
         navigation.navigate('Login');
       } else {
+        stopGobackAction(true, navigation);
         checkOutAction(navigation, ProductsArr[id]);
       }
     },

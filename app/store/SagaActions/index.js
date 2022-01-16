@@ -1,4 +1,4 @@
-import {takeEvery, take, put} from 'redux-saga/effects';
+import {takeEvery, takeLatest, take, put} from 'redux-saga/effects';
 import {REHYDRATE} from 'redux-persist/lib/constants';
 import {
   LOGIN,
@@ -11,9 +11,12 @@ import {
   LOGOUT_SUCCESS,
   COUNTER,
   DELETE_ITEM,
+  STOP_GOBACK,
+  STOP_GOBACK_SUCCESS,
 } from '../ActionTypes';
-import {select} from 'redux-saga/effects';
+import {select, delay} from 'redux-saga/effects';
 import {ProductsArr, BestSell} from '../../screens/Home/ProductsArr';
+
 // watchers
 function* rootSaga() {
   yield take(REHYDRATE);
@@ -23,9 +26,21 @@ function* rootSaga() {
   yield takeEvery(LOGOUT, logoutAction);
   yield takeEvery(COUNTER, counterAction);
   yield takeEvery(DELETE_ITEM, deleteAction);
+  yield takeLatest(STOP_GOBACK, componentCounterAction);
 }
 
 //workers
+const discount = async totalAmount => {
+  const discountPercent = 5;
+  const discountCal = totalAmount - (totalAmount * discountPercent) / 100;
+  return discountCal.toFixed(2);
+};
+
+const totalAmount = async checkOutArray => {
+  const totalAmount = await checkOutArray.reduce((a, {price}) => a + price, 0);
+  return totalAmount;
+};
+
 function* loginAction({navigation, otp}) {
   const payload = {
     type: LOGIN_SUCCESS,
@@ -153,14 +168,14 @@ function* deleteAction(item) {
   yield put(setCheckoutStore);
 }
 
-const discount = async totalAmount => {
-  const discountPercent = 5;
-  const discountCal = totalAmount - (totalAmount * discountPercent) / 100;
-  return discountCal.toFixed(2);
-};
+function* componentCounterAction({param, navigation}) {
+  yield param && delay(20000);
+  param && navigation.navigate('DrawerNav');
+  const payload = {
+    type: STOP_GOBACK_SUCCESS,
+    checked: param,
+  };
+  yield put(payload);
+}
 
-const totalAmount = async checkOutArray => {
-  const totalAmount = await checkOutArray.reduce((a, {price}) => a + price, 0);
-  return totalAmount;
-};
 export default rootSaga;
