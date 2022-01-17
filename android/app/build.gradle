@@ -128,7 +128,7 @@ def nativeArchitectures = project.getProperties().get("reactNativeDebugArchitect
 public class Version {
     private final static int VERSION_BUILD = 0;
     private final static int VERSION_MAJOR = 0;
-    private final static int VERSION_MINOR = 11;
+    private final static int VERSION_MINOR = 12;
     public static int getVersionCode() {
         return VERSION_BUILD * 1000 * 1000 + VERSION_MAJOR * 1000 + VERSION_MINOR;
     }
@@ -168,6 +168,14 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            }
+        }
     }
     buildTypes {
         debug {
@@ -181,7 +189,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
