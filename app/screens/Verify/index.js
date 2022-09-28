@@ -27,17 +27,14 @@ const index = () => {
     }
     if (number === store.otp) {
       Platform.OS === 'ios'
-        ? alert('Congrats!')
-        : ToastAndroid.show('Congrats!', ToastAndroid.SHORT);
+        ? alert('Login successfully!')
+        : ToastAndroid.show('Login successfully!', ToastAndroid.SHORT);
       verifyAction();
       navigation.navigate('DrawerNav');
     } else {
       Platform.OS === 'ios'
-        ? alert('The OTP entered is incorrect!')
-        : ToastAndroid.show(
-            'The OTP entered is incorrect!',
-            ToastAndroid.SHORT,
-          );
+        ? alert('OTP is incorrect!')
+        : ToastAndroid.show('OTP is incorrect!', ToastAndroid.SHORT);
     }
   }, [number, store]);
 

@@ -73,10 +73,6 @@ const styles = StyleSheet.create({
   items: {
     marginRight: wdp(10),
     marginVertical: hdp(10),
-    shadowOffset: {width: 10, height: 10},
-    shadowColor: '#000',
-    shadowOpacity: 1,
-    elevation: 6,
   },
   img: {
     height: hdp(180),
